@@ -1,21 +1,14 @@
-const search = document.getElementById("search");
+// Najprosciej to tak zrobic:
+const search = document.getElementById("search-form");
+
 search.addEventListener("submit", function (event) {
+  // blokujemy domyslne zachowanie formularza (bo domyslnie przeladuje strone po kliknieciu w submit)
   event.preventDefault();
-  const inputValue = event.target.value;
+
+  // tworzymy obiekt FormData na podstawie event.target (czyli formularza)
+  const formData = new FormData(event.target);
+  // pobiernie wartosci z inputa
+  const inputValue = formData.get("search");
+
   console.log(inputValue);
 });
-
-/*
-
-Chce zrobic 2 rzeczy banalnie proste ale nie umiem:
-
-1.
----
-Prosta opcja zeby wyszukiwana zawartosc wyswietlic w console.log po wcisnieciu enter... :/
-
-2.
----
-Dać ten inputfield  na srodek ekranu horyzontalnie i wertykalnie.
-
-Pozdro!
-*/
