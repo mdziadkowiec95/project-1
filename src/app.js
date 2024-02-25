@@ -17,7 +17,7 @@ search.addEventListener("submit", function (event) {
   // }
 
   // console.log(inputValue);
-
+  /*
   const request = new XMLHttpRequest();
   request.open(
     "GET",
@@ -31,4 +31,14 @@ search.addEventListener("submit", function (event) {
     console.log(data);
     console.log(data.name, " - ", data.main.temp, "st. C");
   });
+  */
+
+  async function request() {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&units=metric&appid=fc46e9714ae267890941c2e8d3350790`
+    );
+    const city = await response.json();
+    console.log(city);
+  }
+  request(inputValue);
 });
