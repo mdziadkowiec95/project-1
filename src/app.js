@@ -1,37 +1,31 @@
 // Najprosciej to tak zrobic:
 const search = document.getElementById("search-form");
-// const input = document.getElementById("search");
+const cardContainer = document.querySelector(".card-container");
 
-search.addEventListener("submit", function (event) {
-  // blokujemy domyslne zachowanie formularza (bo domyslnie przeladuje strone po kliknieciu w submit)
+const renderCard = function (data) {
+  const html = `
+  <div class="card" style="width: 18rem">
+          <!-- <img src="" class="card-img-top" alt="..." /> -->
+          <div class="card-body">
+            <h5 class="card-title">${data}</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+  `;
+
+  cardContainer.insertAdjacentHTML("beforeend", html);
+};
+
+const data = search.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // tworzymy obiekt FormData na podstawie event.target (czyli formularza)
   const formData = new FormData(event.target);
 
-  // console.log(formData);
-  // pobiernie wartosci z inputa
   const inputValue = formData.get("search");
-  // for (const pair of formData.entries()) {
-  //   console.log(pair[0], pair[1]);
-  // }
-
-  // console.log(inputValue);
-  /*
-  const request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&units=metric&appid=fc46e9714ae267890941c2e8d3350790`
-  );
-  request.send();
-
-  request.addEventListener("load", function () {
-    // console.log(this.responseText);
-    const data = JSON.parse(this.responseText);
-    console.log(data);
-    console.log(data.name, " - ", data.main.temp, "st. C");
-  });
-  */
 
   async function request() {
     const response = await fetch(
@@ -41,4 +35,7 @@ search.addEventListener("submit", function (event) {
     console.log(city);
   }
   request(inputValue);
+  // TUTAJ NIE WIEM CZEMU DATA JEST UNDEFINED :/ Chcialbym zeby to wygladalo tak ze klikam enter po wprowadzeniu i renderuje mi karte w ktorej w tytule beda dane pobrane z API
+  console.log(data);
+  renderCard(data);
 });
