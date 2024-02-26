@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 // Najprosciej to tak zrobic:
 const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");

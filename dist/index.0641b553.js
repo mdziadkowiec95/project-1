@@ -579,7 +579,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"bNKaB":[function(require,module,exports) {
-"use strict";
+// "use strict";
 // Najprosciej to tak zrobic:
 const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");
