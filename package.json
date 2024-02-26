@@ -2,10 +2,11 @@
   "name": "project-1",
   "description": "first project",
   "version": "1.0.0",
-  "main": "script.js",
+  "default": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --dist-dir ./dist"
   },
   "keywords": [
     "pierwszy"
