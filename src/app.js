@@ -7,10 +7,12 @@ const renderCard = function (data) {
   <div class="card" style="width: 18rem">
           <!-- <img src="" class="card-img-top" alt="..." /> -->
           <div class="card-body">
-            <h5 class="card-title">${data}</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+            <h5 class="card-title">${data.name}</h5>
+            <p class="card-text">TEMP: ${data.main.temp} st.C 
+            </p>
+            <p class="card-text">ODCZUWALNA: ${data.main.feels_like} st.C 
+            </p>
+            <p class="card-text">ZACHMURZENIE: ${data.clouds.all} % 
             </p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
@@ -20,7 +22,7 @@ const renderCard = function (data) {
   cardContainer.insertAdjacentHTML("beforeend", html);
 };
 
-const data = search.addEventListener("submit", function (event) {
+search.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const formData = new FormData(event.target);
@@ -33,9 +35,11 @@ const data = search.addEventListener("submit", function (event) {
     );
     const city = await response.json();
     console.log(city);
+
+    return city;
   }
-  request(inputValue);
-  // TUTAJ NIE WIEM CZEMU DATA JEST UNDEFINED :/ Chcialbym zeby to wygladalo tak ze klikam enter po wprowadzeniu i renderuje mi karte w ktorej w tytule beda dane pobrane z API
+
+  const data = await request(inputValue);
   console.log(data);
   renderCard(data);
 });
