@@ -1,11 +1,12 @@
 // Najprosciej to tak zrobic:
 const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");
+const input = document.getElementById("search");
 
 const renderCard = function (data) {
   const html = `
   <div class="card" style="width: 18rem">
-          <!-- <img src="" class="card-img-top" alt="..." /> -->
+          <img src="https://countryflagsapi.netlify.app/flag/${data.sys.country}.svg" class="card-img-top" alt="..." /> 
           <div class="card-body">
             <h5 class="card-title">${data.name}</h5>
             <p class="card-text">TEMP: ${data.main.temp} st.C 
@@ -14,12 +15,13 @@ const renderCard = function (data) {
             </p>
             <p class="card-text">ZACHMURZENIE: ${data.clouds.all} % 
             </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="https://www.google.pl/maps/place/${data.name}" class="btn btn-primary">Check ${data.name} <br> on Google Maps</a>
           </div>
         </div>
   `;
 
   cardContainer.insertAdjacentHTML("beforeend", html);
+  // cardContainer.classList.add("invisible");
 };
 
 search.addEventListener("submit", async function (event) {
@@ -40,6 +42,7 @@ search.addEventListener("submit", async function (event) {
   }
 
   const data = await request(inputValue);
-  console.log(data);
+  console.log("2", data);
   renderCard(data);
+  input.classList.add("invisible");
 });

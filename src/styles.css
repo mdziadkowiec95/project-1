@@ -5,12 +5,17 @@ h1 {
 
 body {
   min-height: calc(100vh - 56px);
+  background-color: tomato;
 }
 
-.col{
+.col {
   /** 
     * Ustaw minimalną wysokość kolumny na 100% wysokości widoku
     * 100vh (100% viewport height, czyli 100% okna przegladarki) - 56px (odejmuje wysokosc navbara)
   */
   min-height: calc(100vh - 56px);
+}
+
+.invisible {
+  opacity: 0;
 }
