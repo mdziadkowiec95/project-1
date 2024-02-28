@@ -38,12 +38,18 @@ search.addEventListener("submit", async function (event) {
     );
     const city = await response.json();
     console.log(city);
-
     return city;
-  }
 
+    // const clearThis = await function (target) {
+    //   event.target.value = "";
+    // };
+    // clearThis(this);
+  }
   const data = await request(inputValue);
   console.log("2", data);
   renderCard(data);
+  console.log(inputValue);
+  input.value = "";
+
   // input.classList.add("invisible");
 });
