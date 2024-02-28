@@ -70,8 +70,9 @@ search.addEventListener("submit", async function (event) {
     console.log(inputValue);
     input.value = "";
   } catch (err) {
-    console.log(err.message);
+    console.log("x", err);
     renderErr(err.message);
+    input.value = "";
   }
 
   // input.classList.add("invisible");
