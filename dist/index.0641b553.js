@@ -585,6 +585,7 @@ const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");
 const input = document.getElementById("search");
 const renderCard = function(data) {
+    cardContainer.innerHTML = "";
     const html = `
   <div class="card" style="width: 18rem">
           <img src="https://countryflagsapi.netlify.app/flag/${data.sys.country}.svg" class="card-img-top" alt="..." /> 
