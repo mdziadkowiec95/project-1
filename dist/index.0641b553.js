@@ -616,7 +616,7 @@ search.addEventListener("submit", async function(event) {
     const data = await request(inputValue);
     console.log("2", data);
     renderCard(data);
-    input.classList.add("invisible");
+// input.classList.add("invisible");
 });
 
 },{}]},["3lsJq","bNKaB"], "bNKaB", "parcelRequire1ed2")

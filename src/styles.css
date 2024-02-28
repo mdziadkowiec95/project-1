@@ -19,3 +19,11 @@ body {
 .invisible {
   opacity: 0;
 }
+
+.bg-body-tertiary {
+  background-color: gold !important;
+}
+
+.search-item {
+  margin: auto;
+}
