@@ -584,7 +584,14 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");
 const historyContainer = document.getElementById("history-s");
+const resetHistoryBtn = document.getElementById("reset-history-btn");
 const input = document.getElementById("search");
+////// RESET BUTTON////////
+resetHistoryBtn.addEventListener("click", function() {
+    localStorage.clear();
+    historyContainer.innerHTML = "";
+    cardContainer.innerHTML = "";
+});
 const renderCard = function(data) {
     cardContainer.innerHTML = "";
     const html = `
@@ -634,8 +641,8 @@ search.addEventListener("submit", async function(event) {
             let history = localStorage.getItem("searchHistory");
             if (!history) history = [];
             else history = JSON.parse(history);
-            // Dodanie nowego terminu na początek historii
             history.unshift(inputValue);
+            console.log(history.length);
             if (history.length > 10) history.pop(); // Usunięcie ostatniego elementu
             // Zapisanie zaktualizowanej historii do localStorage
             localStorage.setItem("searchHistory", JSON.stringify(history));
@@ -643,7 +650,7 @@ search.addEventListener("submit", async function(event) {
             console.log(history);
             displayHistory(history);
         }
-        // Funkcja do wyświetlania historii
+        // wysletlanie historii
         function displayHistory(history) {
             historyContainer.innerHTML = "";
             history.forEach((item)=>{
@@ -653,13 +660,10 @@ search.addEventListener("submit", async function(event) {
                 historyContainer.appendChild(listItem);
             });
         }
-        // Wyświetlenie historii po załadowaniu strony
-        document.addEventListener("DOMContentLoaded", function() {
-            if (typeof Storage !== "undefined") {
-                const history = localStorage.getItem("searchHistory");
-                if (history) displayHistory(JSON.parse(history));
-            }
-        });
+        // // Wywołanie funkcji po załadowaniu strony
+        // document.addEventListener("DOMContentLoaded", displayHistory());
+        // // Wywołanie funkcji po odświeżeniu strony
+        // window.addEventListener("load", displayHistory());
         ///////////////////////////////////////////////////////////////////
         async function request() {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&units=metric&appid=fc46e9714ae267890941c2e8d3350790`);

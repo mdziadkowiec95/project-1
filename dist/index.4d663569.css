@@ -4,7 +4,7 @@ h1 {
 }
 
 body {
-  background-color: tomato;
+  background-color: #01295f;
   min-height: calc(100vh - 56px);
 }
 
@@ -17,7 +17,7 @@ body {
 }
 
 .bg-body-tertiary {
-  background-color: gold !important;
+  background-color: #f5b841 !important;
 }
 
 .search-item {

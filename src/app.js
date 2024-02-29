@@ -3,7 +3,15 @@
 const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");
 const historyContainer = document.getElementById("history-s");
+const resetHistoryBtn = document.getElementById("reset-history-btn");
 const input = document.getElementById("search");
+
+////// RESET BUTTON////////
+resetHistoryBtn.addEventListener("click", function () {
+  localStorage.clear();
+  historyContainer.innerHTML = "";
+  cardContainer.innerHTML = "";
+});
 
 const renderCard = function (data) {
   cardContainer.innerHTML = "";
@@ -64,8 +72,8 @@ search.addEventListener("submit", async function (event) {
         history = JSON.parse(history);
       }
 
-      // Dodanie nowego terminu na początek historii
       history.unshift(inputValue);
+      console.log(history.length);
 
       if (history.length > 10) {
         history.pop(); // Usunięcie ostatniego elementu
@@ -78,7 +86,7 @@ search.addEventListener("submit", async function (event) {
       displayHistory(history);
     }
 
-    // Funkcja do wyświetlania historii
+    // wysletlanie historii
     function displayHistory(history) {
       historyContainer.innerHTML = "";
       history.forEach((item) => {
@@ -89,15 +97,12 @@ search.addEventListener("submit", async function (event) {
       });
     }
 
-    // Wyświetlenie historii po załadowaniu strony
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof Storage !== "undefined") {
-        const history = localStorage.getItem("searchHistory");
-        if (history) {
-          displayHistory(JSON.parse(history));
-        }
-      }
-    });
+    // // Wywołanie funkcji po załadowaniu strony
+    // document.addEventListener("DOMContentLoaded", displayHistory());
+
+    // // Wywołanie funkcji po odświeżeniu strony
+    // window.addEventListener("load", displayHistory());
+
     ///////////////////////////////////////////////////////////////////
     async function request() {
       const response = await fetch(
