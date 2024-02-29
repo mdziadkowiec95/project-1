@@ -2,6 +2,7 @@
 // Najprosciej to tak zrobic:
 const search = document.getElementById("search-form");
 const cardContainer = document.querySelector(".card-container");
+const historyContainer = document.getElementById("history-s");
 const input = document.getElementById("search");
 
 const renderCard = function (data) {
@@ -50,12 +51,60 @@ search.addEventListener("submit", async function (event) {
 
     const inputValue = formData.get("search");
 
+    if (inputValue !== "") {
+      addToHistory(inputValue);
+      input.value = "";
+    }
+
+    function addToHistory(inputValue) {
+      let history = localStorage.getItem("searchHistory");
+      if (!history) {
+        history = [];
+      } else {
+        history = JSON.parse(history);
+      }
+
+      // Dodanie nowego terminu na początek historii
+      history.unshift(inputValue);
+
+      if (history.length > 10) {
+        history.pop(); // Usunięcie ostatniego elementu
+      }
+
+      // Zapisanie zaktualizowanej historii do localStorage
+      localStorage.setItem("searchHistory", JSON.stringify(history));
+      // Wyświetlenie historii
+      console.log(history);
+      displayHistory(history);
+    }
+
+    // Funkcja do wyświetlania historii
+    function displayHistory(history) {
+      historyContainer.innerHTML = "";
+      history.forEach((item) => {
+        const listItem = document.createElement("li");
+        listItem.classList = "list-group-item";
+        listItem.textContent = item + " 🔎";
+        historyContainer.appendChild(listItem);
+      });
+    }
+
+    // Wyświetlenie historii po załadowaniu strony
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof Storage !== "undefined") {
+        const history = localStorage.getItem("searchHistory");
+        if (history) {
+          displayHistory(JSON.parse(history));
+        }
+      }
+    });
+    ///////////////////////////////////////////////////////////////////
     async function request() {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&units=metric&appid=fc46e9714ae267890941c2e8d3350790`
       );
       const city = await response.json();
-      console.log(city);
+      // console.log(city);
       return city;
 
       // const clearThis = await function (target) {
@@ -64,10 +113,10 @@ search.addEventListener("submit", async function (event) {
       // clearThis(this);
     }
     const data = await request(inputValue);
-    console.log("2", data);
+    // console.log("2", data);
     renderCard(data);
 
-    console.log(inputValue);
+    // console.log(inputValue);
     input.value = "";
   } catch (err) {
     console.log("x", err);
