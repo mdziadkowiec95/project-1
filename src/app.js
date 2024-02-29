@@ -74,14 +74,14 @@ search.addEventListener("submit", async function (event) {
 
       history.unshift(inputValue);
       console.log(history.length);
-
+      // 10 elementow
       if (history.length > 10) {
-        history.pop(); // Usunięcie ostatniego elementu
+        history.pop();
       }
 
-      // Zapisanie zaktualizowanej historii do localStorage
+      //local storage
       localStorage.setItem("searchHistory", JSON.stringify(history));
-      // Wyświetlenie historii
+      // wyświetlenie historii
       console.log(history);
       displayHistory(history);
     }
