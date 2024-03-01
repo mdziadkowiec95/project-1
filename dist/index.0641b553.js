@@ -643,10 +643,11 @@ search.addEventListener("submit", async function(event) {
             else history = JSON.parse(history);
             history.unshift(inputValue);
             console.log(history.length);
-            if (history.length > 10) history.pop(); // Usunięcie ostatniego elementu
-            // Zapisanie zaktualizowanej historii do localStorage
+            // 10 elementow
+            if (history.length > 10) history.pop();
+            //local storage
             localStorage.setItem("searchHistory", JSON.stringify(history));
-            // Wyświetlenie historii
+            // wyświetlenie historii
             console.log(history);
             displayHistory(history);
         }
